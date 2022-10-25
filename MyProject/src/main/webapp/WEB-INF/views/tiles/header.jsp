@@ -33,6 +33,8 @@
         <li class="nav-item"><a href="#" class="nav-link">단건조회</a></li>
         <li class="nav-item"><a href="#" class="nav-link">유저등록</a></li>
         <li class="nav-item"><a href="#" class="nav-link">유저수정</a></li>
+        <li class="nav-item"><a href="${pageContext.request.contextPath}/booklist" class="nav-link">도서목록</a></li>
+        <li class="nav-item"><a href="${pageContext.request.contextPath}/bookinsert" class="nav-link">도서등록</a></li>
       </ul>
     </header>
   </div>

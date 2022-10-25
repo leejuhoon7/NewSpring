@@ -5,7 +5,10 @@
   
 <configuration>
 	<settings>
+	<!-- 테이블의 컬럼(대소문자 구분 없음) 
+				-> 자바의 필드(대소문자 구분)-->
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<!-- java의 null을 어떤식으로 처리할지 결정 -->
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>  
 	

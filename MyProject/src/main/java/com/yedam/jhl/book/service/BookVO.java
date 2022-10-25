@@ -17,5 +17,9 @@ public class BookVO {
 	private String bookPublisher;
 	private String bookInfo;
 	
+	//대여관련
+	
+	private int totalPrice;
+	private int rentCount;
 	
 }
