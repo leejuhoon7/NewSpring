@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yedam.java.emp.mapper.EmpMapper">
+
+<!-- 	<resultMap type="EmpVO" id="empInfo">
+		<id column = "employee_id" property="employeeId"></id>
+		<result column = "last_name" property="lastName"></result>
+	</resultMap>  -->
+	
+	<!-- 전체조회 -->
+	<select id="getEmpList" resultType="EmpVO">
+		SELECT * FROM EMPLOYEES
+			
+	</select>
+	
+	<select id="getEmp" parameterType="EmpVO" resultType="EmpVO">
+		SELECT * 
+		FROM EMPLOYEES
+		<where>
+		<if test ="employeeId != 0">
+		EMPLOYEE_ID = #{employeeId}
+		</if>
+		<if test="firstName != null and !firstName.equals('')">
+		OR FIRST_NAME = #{firstName}
+		</if>
+		</where>
+	</select>
+	
+	<!-- 등록 -->
+	
+	<insert id ="insertEmp" parameterType="EmpVO">
+		<selectKey keyProperty="employeeId" resultType="Integer" order="BEFORE">
+		SELECT MAX(employee_id)+1 FROM EMPLOYEES	
+	
+		</selectKey>
+		insert into employees
+		            (employee_id,
+		             first_name,
+		             last_name,
+		             email,
+		             <if test = "hireDate != null">
+		             hire_date,
+		             </if>
+		             job_id,
+		             salary)
+		       values ( #{employeeId},
+		                #{firstName},
+		                #{lastName},
+		                #{email},
+		                <if test = "hireDate != null">
+		                #{hireDate},
+		           
+		                </if>
+		                #{jobId},
+		                #{salary}
+		       )
+	</insert>
+	
+	<update id="updateEmpSalary" parameterType="Integer">
+		UPDATE EMPLOYEES
+		SET SALARY = SALARY * 1.1
+		WHERE EMPLOYEE_ID = #{eId}
+	
+	</update>
+	
+	<delete id="deleteEmpInfo" parameterType="int">
+	DELETE FROM EMPLOYEES
+	WHERE EMPLOYEE_ID = #{employeeId}
+	</delete>
+	
+	<!-- 수정 : 사원정보를 넘겨받아서 이름과, 성, 이메일을 수정할 수 있는 메소드 -->
+	
+	<update id="updateEmpInfo" parameterType="EmpVO">
+		UPDATE EMPLOYEES
+		<!--  -->
+			<set>
+				<if test ="firstName != null and !firstName.equals('')">
+					first_name = #{firstName},
+				</if>
+				
+				<if test ="lastName != null and !lastName.equals('')">
+					last_name = #{lastName},
+				</if>
+				
+				<if test ="email != null and !email.equals('')">
+					email = #{email},
+				</if>
+			</set>
+	
+			WHERE EMPLOYEE_ID = #{employeeId}
+			
+	</update>
+	
+</mapper>

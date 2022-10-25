@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yedam.jhl.user.mapper.UserMapper">
+
+
+<!-- 전체조회 -->
+<select id="getUserList" resultType="UserVO">
+	SELECT * FROM USERS
+
+</select>
+
+<!-- 등록 -->
+
+<insert id="getInsertUser" parameterType="UserVO">
+	INSERT INTO USERS 
+	(USER_ID,
+	 USER_NAME,
+	 USER_PASSWORD,
+	 USER_NIC,
+	 USER_DATE,
+	 USER_PHONE,
+	 USER_EMAIL)
+	 
+	 values(#{userId},
+	        #{userName},
+	        #{userPassword},
+	        #{userNic},
+	        #{userDate},
+	        #{userPhone},
+	        #{userEmail}
+	 )
+
+</insert>
+	
+</mapper>
